@@ -1,43 +1,10 @@
-
-ROOT_DIR = ../..
-
-STM8MU_TOOLCHAIN_PATH = $(ROOT_DIR)
-PATH := $(PATH):$(STM8MU_TOOLCHAIN_PATH)
-
-####################################
-#
-#
-####################################
-
-ASM = stm8mu_asm
-
-####################################
-#
-#
-####################################
-
-OBJS += syntax.l0
-
-####################################
-#
-#
-####################################
+ASM = ../../asm/stm8mu_asm
 
 ASM_OPTIONS += -I
 ASM_OPTIONS += -DTEST0=256
 
-####################################
-#
-#
-####################################
-
-.PHONY: all clean depend flash go
-
-%.l0: %.asm
-	$(ASM) $(ASM_OPTIONS) $<
-
-all: $(OBJS)
+syntax.l0: syntax.asm
+	$(ASM) $(ASM_OPTIONS) syntax.asm
 
 clean:
-	rm -f $(OBJS)
-
+	rm -f *.l0 *~
