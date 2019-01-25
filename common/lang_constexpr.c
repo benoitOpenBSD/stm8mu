@@ -182,8 +182,8 @@ static void _exprr(struct symbols_t *sl, struct token_t *token)
 
     _or_opd(sl, token);
 
-    operand2 = _exprstack_pop(sl);
-    operand1 = _exprstack_pop(sl);
+    operand2 = _exprstack_pop();
+    operand1 = _exprstack_pop();
 
     _exprstack_push(operand1 | operand2);
 
@@ -216,8 +216,8 @@ static void _or_opdr(struct symbols_t *sl, struct token_t *token)
 
     _xor_opd(sl, token);
 
-    operand2 = _exprstack_pop(sl);
-    operand1 = _exprstack_pop(sl);
+    operand2 = _exprstack_pop();
+    operand1 = _exprstack_pop();
 
     _exprstack_push(operand1 ^ operand2);
 
@@ -250,8 +250,8 @@ static void _xor_opdr(struct symbols_t *sl, struct token_t *token)
 
     _and_opd(sl, token);
 
-    operand2 = _exprstack_pop(sl);
-    operand1 = _exprstack_pop(sl);
+    operand2 = _exprstack_pop();
+    operand1 = _exprstack_pop();
 
     _exprstack_push(operand1 & operand2);
 
@@ -292,8 +292,8 @@ static void _and_opdr(struct symbols_t *sl, struct token_t *token)
 
     _shift_opd(sl, token);
 
-    operand2 = _exprstack_pop(sl);
-    operand1 = _exprstack_pop(sl);
+    operand2 = _exprstack_pop();
+    operand1 = _exprstack_pop();
 
     _exprstack_push(operation == OPERATION_SHIFT_LEFT ? operand1 << operand2 : operand1 >> operand2);
 
@@ -333,8 +333,8 @@ static void _shift_opdr(struct symbols_t *sl, struct token_t *token)
 
     _add_opd(sl, token);
 
-    operand2 = _exprstack_pop(sl);
-    operand1 = _exprstack_pop(sl);
+    operand2 = _exprstack_pop();
+    operand1 = _exprstack_pop();
 
     _exprstack_push(operation == OPERATION_ADD ? operand1 + operand2 : operand1 - operand2);
 
@@ -377,8 +377,8 @@ static void _add_opdr(struct symbols_t *sl, struct token_t *token)
 
     _mul_opd(sl, token);
 
-    operand2 = _exprstack_pop(sl);
-    operand1 = _exprstack_pop(sl);
+    operand2 = _exprstack_pop();
+    operand1 = _exprstack_pop();
 
     if (operation == OPERATION_MUL)
         _exprstack_push(operand1 * operand2);
@@ -403,7 +403,7 @@ static void _mul_opd(struct symbols_t *sl, struct token_t *token)
         PRINTF("NEG" NL);
 
         _not_opd(sl, token);
-        operand = _exprstack_pop(sl);
+        operand = _exprstack_pop();
 
         PRINTF("~ operand %lld" NL, operand);
 
