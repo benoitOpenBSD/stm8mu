@@ -208,4 +208,3 @@ void cport_set_timeout(uint32_t timeout)
 {
     timeout = timeout;
 }
-
