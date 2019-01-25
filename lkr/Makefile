@@ -3,7 +3,7 @@ CFLAGS = -O2 -Wall
 PREFIX = /usr/local
 
 stm8mu_lkr: main.c lang.c linker.c
-	$(CC) $(CFLAGS) -I../common -o stm8mu_lkr main.c lang.c linker.c ../common/*.c
+	$(CC) $(CFLAGS) -I../common -o stm8mu_lkr main.c lang.c linker.c ../common/libcommon.a
 
 install:
 	strip stm8mu_lkr
