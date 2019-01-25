@@ -1,54 +1,37 @@
-####################################
 #
+# Makefile
 #
-####################################
 
-ROOT_DIR = ..
-TARGET = $(ROOT_DIR)/libcommon.a
+TARGET = libcommon.a
 
-####################################
-#
-#
-####################################
-CFLAGS += -I.
+CFLAGS += -I. -Wall
 
-####################################
-#
-#
-####################################
-C_FILES += btorder.c
-C_FILES += llist.c
-C_FILES += token.c
-C_FILES += memdata.c
-C_FILES += stm8chip.c
-C_FILES += debug.c
-C_FILES += memdata.c
-C_FILES += srec.c
-C_FILES += bmem.c
-C_FILES += l0.c
-C_FILES += symbol.c
-C_FILES += section.c
-C_FILES += relocation.c
-C_FILES += lang_constexpr.c
-C_FILES += lang_util.c
+libcommon_obj := \
+	btorder.o \
+	llist.o \
+	token.o \
+	memdata.o \
+	stm8chip.o \
+	debug.o \
+	memdata.o \
+	srec.o \
+	bmem.o \
+	l0.o \
+	symbol.o \
+	section.o \
+	relocation.o \
+	lang_constexpr.o \
+	lang_util.o
 
-C_OBJS = $(foreach obj,$(C_FILES) ,$(patsubst %c, %o, $(obj)))
-OBJS += $(C_OBJS)
+.PHONY: all clean
 
-####################################
-#
-#
-####################################
+.c.o:
+	${CC} ${CFLAGS} -c -o $@ $<
 
-.PHONY: all clean depend
 all: $(TARGET)
+
 clean:
-	rm -f $(TARGET) $(OBJS) $(DEPFILE)
-depend:
-	$(CC) $(CFLAGS) -MM $(C_FILES) > $(DEPFILE)
+	rm -f $(TARGET) ${libcommon_obj} *~
 
-$(TARGET): $(OBJS)
-	$(AR) r $@ $^
-
--include $(DEPFILE)
-
+$(TARGET): ${libcommon_obj}
+	$(AR) r $@ ${libcommon_obj}
