@@ -157,7 +157,7 @@ int l0_save(char *fpath,
         struct symbol_t *s;
         uint32_t length;
         struct l0_symbol_block_t *sblock;
-        char *section;
+        char *section = NULL;
         char nosection[1];
 
         s = ll->p;
